@@ -1,0 +1,91 @@
+openapi: 3.0.1
+info:
+  title: MyAPI
+  version: '1.0'
+  description: Some Api for...
+  contact:
+    email: ryan.fore@crsp.org
+    name: Support
+    url: http://crsp.org
+  license:
+    name: GPL
+servers:
+  - url: https://my-json-server.typicode.com/hippiejfoxx/APITraining
+    variables: {}
+  - url: https://my-json-server.typicode.com/typicode/demo
+    variables: {}
+  - url: http://localhost:3000
+    variables: {}
+paths:
+  /users:
+    get:
+      summary: ''
+      description: ''
+      operationId: 'users'
+      responses:
+        2XX :
+          description: "A full user"
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/FullUser"
+        default:
+          description: Default error sample response
+    post:
+      summary: ''
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        2XX :
+          description: "A full user"
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/FullUser"
+        default:
+          description: Default error sample response
+  /attempts:
+    get:
+      summary: ''
+      description: ''
+      operationId: 'attempt'
+      responses:
+        2XX :
+          description: "A full user"
+          content: 
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Attempt"
+        default:
+          description: Default error sample response
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+       username:
+        type: string
+       score:
+        type: integer
+       active:
+        type: boolean
+    Attempt:
+      type: object
+      properties:
+        id:
+          type: string
+        score:
+          type: integer
+        userId:
+          type: string
+    FullUser:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/User"
+      properties:
+        id: 
+          type: object
